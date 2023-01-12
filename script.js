@@ -3,43 +3,29 @@ const movieName = document.createElement('h2');
 const whatsYourRating = document.createElement('h1');
 const movieRating = document.createElement('select');
 
-const movieRatingStarFive = document.createElement('option');
-const movieRatingStarFour = document.createElement('option');
-const movieRatingStarThree = document.createElement('option');
-const movieRatingStarTwo = document.createElement('option');
-const movieRatingStarOne = document.createElement('option');
-
 const averageRatingText = document.createElement('h1');
 const averageRating = document.createElement('h2');
 
-const ratingNames = ['', 'onestar', 'twostar', 'threestar', 'fourstar', 'fivestar'];
-//나중에 setAttribute를 반복문을 통해서 설정하기 위해 선언한 배열.
+const ratingValues = ['onestar', 'twostar', 'threestar', 'fourstar', 'fivestar'];
+const ratingStarts = ['★', '★★', '★★★', '★★★★', '★★★★★']
+
+let i = 0;
+
+for (ratevalue in ratingValues){
+    let movieRatingOption = document.createElement('option');
+    movieRatingOption.setAttribute('value', ratingValues[ratevalue]);
+    movieRatingOption.textContent = ratingStarts[i];
+    movieRating.appendChild(movieRatingOption);
+    i++;
+}
 
 movieNameText.textContent = "영화 제목";
 movieName.textContent = "아바타 2 : 물의 길";
 whatsYourRating.textContent = "당신의 평점은?";
 averageRatingText.textContent = "평균 점수?";
 
+movieRating.setAttribute('title', 'movieRaing');
 movieRating.setAttribute('onchange', 'onChange()');
-
-movieRatingStarFive.textContent = '★★★★★';
-movieRatingStarFour.textContent = '★★★★';
-movieRatingStarThree.textContent = '★★★';
-movieRatingStarTwo.textContent = '★★';
-movieRatingStarOne.textContent = '★';
-
-movieRatingStarFive.setAttribute('value','fivestar');
-movieRatingStarFour.setAttribute('value','fourstar');
-movieRatingStarThree.setAttribute('value','threestar');
-movieRatingStarTwo.setAttribute('value','twostar');
-movieRatingStarOne.setAttribute('value','onestar');
-
-
-movieRating.appendChild(movieRatingStarFive);
-movieRating.appendChild(movieRatingStarFour);
-movieRating.appendChild(movieRatingStarThree);
-movieRating.appendChild(movieRatingStarTwo);
-movieRating.appendChild(movieRatingStarOne);
 
 document.body.appendChild(movieNameText);
 document.body.appendChild(movieName);

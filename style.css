@@ -4,15 +4,21 @@
     box-sizing: border-box;
     font-family: 'Sofia Sans', sans-serif;
 }
-
-body{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
+#menu{
     text-align: center;
+    border-right: black solid 5px;
+    padding-right: 10px;
 }
-
+#rating{
+    justify-self: center;
+    text-align: center;
+    
+}
+.container{
+    display:grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: minmax(900px, auto);
+}
 .movie-rating-div{
     margin: 20px;
 }

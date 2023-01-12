@@ -1,8 +1,6 @@
 const movieNameText = document.createElement('h1');
 const movieName = document.createElement('h2');
 
-
-
 const averageRatingText = document.createElement('h1');
 const averageRating = document.createElement('h2');
 
@@ -11,7 +9,25 @@ const movieRatingSelections = ['작품성', '연기', '오락성','스토리'];
 const ratingValues = [1, 2, 3, 4, 5];
 const ratingStars = ['★', '★★', '★★★', '★★★★', '★★★★★']
 
+const SaveRatingsBtn = document.createElement('input');
+SaveRatingsBtn.setAttribute('type', 'button');
+SaveRatingsBtn.setAttribute('value', 'save');
+SaveRatingsBtn.setAttribute('onclick', 'onClickSaveBtn()');
 
+const ratingPage = document.getElementById("rating");
+
+const arrAllMovieRatings = [];
+// 각 원소는 [작품성, 연기, 오락성, 스토리, 평균 점수] 값을 가진다.
+
+function onClickSaveBtn(){
+    let tempArrMovieRatings = [];
+    for(movieRates in movieRatingSelections){
+        let tempRating = document.getElementById(movieRatingSelections[movieRates]);
+        tempArrMovieRatings.push(Number(tempRating.options[tempRating.selectedIndex].value));
+    }
+    tempArrMovieRatings.push(CalculateAverageRating());
+    arrAllMovieRatings.push(tempArrMovieRatings);
+}
 
 function ShowRatingOptions(){
     for (select in movieRatingSelections){
@@ -37,7 +53,7 @@ function ShowRatingOptions(){
         movieRatingDiv.appendChild(ratingText);
         movieRatingDiv.appendChild(movieRatingSelection);
 
-        document.body.appendChild(movieRatingDiv);
+        ratingPage.appendChild(movieRatingDiv);
     }
 }
 
@@ -58,17 +74,18 @@ function CalculateAverageRating(){
 
 function ShowAverageRating(){
     averageRatingText.textContent = "평균 점수?";
-    document.body.appendChild(averageRatingText);
-    document.body.appendChild(averageRating);
+    ratingPage.appendChild(averageRatingText);
+    ratingPage.appendChild(averageRating);
 }
 
 function ShowMovieName(){
     movieNameText.textContent = "영화 제목";
     movieName.textContent = "아바타 2 : 물의 길";
-    document.body.appendChild(movieNameText);
-    document.body.appendChild(movieName);
+    ratingPage.appendChild(movieNameText);
+    ratingPage.appendChild(movieName);
 }
 
 ShowMovieName();
 ShowRatingOptions();
 ShowAverageRating();
+ratingPage.appendChild(SaveRatingsBtn);

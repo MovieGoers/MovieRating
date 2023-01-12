@@ -12,3 +12,7 @@ body{
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.movie-rating-div{
+    margin: 20px;
+}

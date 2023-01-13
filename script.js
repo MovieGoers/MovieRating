@@ -5,7 +5,7 @@ const averageRatingText = document.createElement('h1');
 const averageRating = document.createElement('h2');
 
 
-const movieRatingSelections = ['작품성', '연기', '오락성','스토리'];
+const movieRatingSelections = ['작품성', '연기', '오락성','스토리', '미술', '촬영', '편집'];
 const ratingValues = [1, 2, 3, 4, 5];
 const ratingStars = ['★', '★★', '★★★', '★★★★', '★★★★★']
 
@@ -19,6 +19,8 @@ const ratingPage = document.getElementById("rating");
 const arrAllMovieRatings = [];
 // 각 원소는 [작품성, 연기, 오락성, 스토리, 평균 점수] 값을 가진다.
 
+let clickedMovieTitle = -1;
+
 function onClickSaveBtn(){
     let tempArrMovieRatings = [];
     for(movieRates in movieRatingSelections){
@@ -27,6 +29,8 @@ function onClickSaveBtn(){
     }
     tempArrMovieRatings.push(CalculateAverageRating());
     arrAllMovieRatings.push(tempArrMovieRatings);
+
+    ratingPage.textContent = '';
 }
 
 function ShowRatingOptions(){
@@ -69,7 +73,7 @@ function CalculateAverageRating(){
         averageRateScore += Number(tempRating.options[tempRating.selectedIndex].value);
         
     }
-    return averageRateScore / movieRatingSelections.length;
+    return (averageRateScore / movieRatingSelections.length).toFixed(2);
 }
 
 function ShowAverageRating(){
@@ -80,12 +84,49 @@ function ShowAverageRating(){
 
 function ShowMovieName(){
     movieNameText.textContent = "영화 제목";
-    movieName.textContent = "아바타 2 : 물의 길";
+    movieName.textContent = document.getElementById((i-1)+'-title-id').textContent;
     ratingPage.appendChild(movieNameText);
     ratingPage.appendChild(movieName);
 }
+function ShowRatingPage(){
+    ShowMovieName();
+    ShowRatingOptions();
+    ShowAverageRating();
+    ratingPage.appendChild(SaveRatingsBtn);
+}
 
-ShowMovieName();
-ShowRatingOptions();
-ShowAverageRating();
-ratingPage.appendChild(SaveRatingsBtn);
+function ShowUserRatedOptions(){
+    for (select in movieRatingSelections){
+        let ratingText = document.createElement('h1');
+        ratingText.textContent = movieRatingSelections[select];
+        
+        document.getElementById('rating').appendChild(ratingText);
+    }
+}
+function ShowUserRatedPage(){
+    ratingPage.innerHTML = '';
+
+    movieNameText.textContent = "영화 제목";
+    movieName.textContent = document.getElementById((clickedMovieTitle)+'-title-id').textContent;
+    let movieAverageText = document.createElement('h1');
+    let movieAverageRating = document.createElement('h2');
+
+    ratingPage.appendChild(movieNameText);
+    ratingPage.appendChild(movieName);
+
+
+    for (select in movieRatingSelections){
+        let ratingText = document.createElement('h1');
+        let movieRated = document.createElement('h2');
+
+        ratingText.textContent = movieRatingSelections[select];
+        ratingPage.appendChild(ratingText);
+        movieRated.textContent = arrAllMovieRatings[clickedMovieTitle][select]+'/5';
+        ratingPage.appendChild(movieRated);
+    }
+    movieAverageText.textContent = '평균 점수?';
+    movieAverageRating.textContent = arrAllMovieRatings[clickedMovieTitle][movieRatingSelections.length]+'/5';
+
+    ratingPage.appendChild(movieAverageText);
+    ratingPage.appendChild(movieAverageRating);
+}

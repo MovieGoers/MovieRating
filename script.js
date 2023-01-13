@@ -13,6 +13,7 @@ const SaveRatingsBtn = document.createElement('input');
 SaveRatingsBtn.setAttribute('type', 'button');
 SaveRatingsBtn.setAttribute('value', 'save');
 SaveRatingsBtn.setAttribute('onclick', 'onClickSaveBtn()');
+SaveRatingsBtn.setAttribute('class', 'btn btn-primary')
 
 const ratingPage = document.getElementById("rating");
 
@@ -41,6 +42,7 @@ function ShowRatingOptions(){
 
         movieRatingDiv.setAttribute("class", "movie-rating-div");
         movieRatingSelection.setAttribute("id", movieRatingSelections[select]);
+        
         movieRatingSelection.setAttribute("onchange", "onChangeRating()");
 
         ratingText.textContent = movieRatingSelections[select];
@@ -53,7 +55,8 @@ function ShowRatingOptions(){
             movieRatingSelection.appendChild(movieRatingOption);
             i++;
         }
-        
+        ratingText.setAttribute("class", 'ratingTextCSS');
+
         movieRatingDiv.appendChild(ratingText);
         movieRatingDiv.appendChild(movieRatingSelection);
 
@@ -85,6 +88,7 @@ function ShowAverageRating(){
 function ShowMovieName(){
     movieNameText.textContent = "영화 제목";
     movieName.textContent = document.getElementById((i-1)+'-title-id').textContent;
+    movieNameText.setAttribute('class', 'ratingTextCSS');
     ratingPage.appendChild(movieNameText);
     ratingPage.appendChild(movieName);
 }

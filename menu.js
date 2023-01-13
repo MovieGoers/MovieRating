@@ -37,6 +37,7 @@ function onClickTitle(event){
 }
 
 movieTitleNameSubmitButton.addEventListener("click", onClickAddMovieTitleToList);
+movieTitleNameSubmitButton.setAttribute('class', 'btn btn-primary')
 
 menu.appendChild(movieList);
 menu.appendChild(movieTitleNameTextBox);
